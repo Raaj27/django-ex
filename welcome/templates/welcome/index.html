@@ -1,321 +1,974 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="zxx" class="no-js">
+
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Welcome to OpenShift</title>
-
-
-<style>
-
-/*!
- * Bootstrap v3.0.0
- *
- * Copyright 2013 Twitter, Inc
- * Licensed under the Apache License v2.0
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Designed and built with all the love in the world @twitter by @mdo and @fat.
- */
-
-  .logo {
-    background-size: cover;
-    height: 46px;
-    width: 180px;
-    margin-top: 6px;
-    background-image: url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MTYuNDUgMTA3LjExIj48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6I2EzMDAwMDt9LmNscy0ye2ZpbGw6I2MwMDt9LmNscy0ze2ZpbGw6IzgyMDAwMDt9PC9zdHlsZT48L2RlZnM+PHRpdGxlPkxvZ290eXBlX1JIX09wZW5TaGlmdF93TG9nb19SR0JfQmxhY2s8L3RpdGxlPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTY0LjgyLDc5LjNMNDYuMSw4Ni4xMkE1NC40MSw1NC40MSwwLDAsMCw0Ny41OCw5NWwxNy43OS02LjQ4YTM0Ljg5LDM0Ljg5LDAsMCwxLS41NS05LjIyIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMzAuOTUgLTMxLjI3KSIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTE0Ny41OSw1OC42QTUzLjQ4LDUzLjQ4LDAsMCwwLDE0Myw1MC44NGwtMTguNzIsNi44MmEzNC44MSwzNC44MSwwLDAsMSw1LjUsNy40MVoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMC45NSAtMzEuMjcpIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNMTA2LjM5LDUzLjI5QTM0LjU3LDM0LjU3LDAsMCwxLDExNi41LDYwLjVsMTguNzMtNi44MUE1My41Miw1My41MiwwLDAsMCwzOC4zLDg5TDU3LDgyLjE0YTM0LjcsMzQuNywwLDAsMSw0OS4zNi0yOC44NSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTMwLjk1IC0zMS4yNykiLz48cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik00OC43NSw5NC41N0wzMSwxMDEuMDVhNTQuMjIsNTQuMjIsMCwwLDAsOC4zNiwxOC4xM0w1OCwxMTIuMzlhMzUsMzUsMCwwLDEtOS4yNi0xNy44MSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTMwLjk1IC0zMS4yNykiLz48cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik0xMjYuMzYsODcuNTFhMzQuMjQsMzQuMjQsMCwwLDEtMy4xNCwxMkEzNC44MiwzNC44MiwwLDAsMSw3NywxMTYuMzZhMzQuNDYsMzQuNDYsMCwwLDEtMTAuMTQtNy4yTDQ4LjE1LDExNkE1My4wNiw1My4wNiwwLDAsMCw2OSwxMzMuMzdhNTMuNjMsNTMuNjMsMCwwLDAsNzEuMTgtMjUuOTFBNTMsNTMsMCwwLDAsMTQ1LDgwLjcxWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTMwLjk1IC0zMS4yNykiLz48cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik0xMzEsNjQuNjVsLTE3Ljc5LDYuNDhhMzQuOTMsMzQuOTMsMCwwLDEsNC4zNiwxOS41OWwxOC42OS02Ljc5QTU0LDU0LDAsMCwwLDEzMSw2NC42NSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTMwLjk1IC0zMS4yNykiLz48cGF0aCBjbGFzcz0iY2xzLTMiIGQ9Ik02NC43NSw4My4wN2EzNC4xOCwzNC4xOCwwLDAsMSwuMDctMy43Nkw0Ni4xLDg2LjEyYzAuMDksMS4yLjI1LDIuMzksMC40MywzLjU4WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTMwLjk1IC0zMS4yNykiLz48cGF0aCBjbGFzcz0iY2xzLTMiIGQ9Ik0xNDQuODcsNTMuNjdjLTAuNTktMS0xLjItMS45LTEuODUtMi44MkwxMjQuMyw1Ny42NmEzMS41NSwzMS41NSwwLDAsMSwyLjMsMi42NVoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMC45NSAtMzEuMjcpIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNNDguMTUsMTE2YTUzLjI5LDUzLjI5LDAsMCwwLDQuNzYsNS43OGwyMC4zNC03LjQyYTM0LjQxLDM0LjQxLDAsMCwxLTYuNDItNS4xN1pNMTQ1LDgwLjcxbC0xOC42OCw2Ljc5YTM0LjI1LDM0LjI1LDAsMCwxLTEuNTgsOGwyMC4zNC03LjQyYTUzLDUzLDAsMCwwLS4wNy03LjQyIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMzAuOTUgLTMxLjI3KSIvPjxwYXRoIGQ9Ik0xODIuMzcsNzQuMTlsLTMuOTQtOC4xM2gtMi42OXY4LjEzSDE2OS4yVjUwLjA5SDE4MGExNiwxNiwwLDAsMSwzLjg0LjQzLDguMTcsOC4xNywwLDAsMSwzLDEuMzYsNi4wOCw2LjA4LDAsMCwxLDEuOTEsMi40Myw4Ljg2LDguODYsMCwwLDEsLjY3LDMuNjMsNy43Myw3LjczLDAsMCwxLTEuMTcsNC40NEE3LjQyLDcuNDIsMCwwLDEsMTg1LDY1bDQuODMsOS4yaC03LjQ5Wm0tMC4zMS0xNy45NGEzLDMsMCwwLDAtMi4yNy0uNzJoLTRWNjAuOGgzLjk1YTMuMjcsMy4yNywwLDAsMCwyLjM1LS42OSwyLjY5LDIuNjksMCwwLDAsLjY5LTJBMi42MiwyLjYyLDAsMCwwLDE4Mi4wNiw1Ni4yNVoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMC45NSAtMzEuMjcpIi8+PHBhdGggZD0iTTE5NC44OSw3NC4xOVY1MC4wOWgxOC40NlY1NS43SDIwMS41djMuMjRoNy4xM3Y1LjUxSDIwMS41djQuMTNoMTIuMDl2NS42MWgtMTguN1oiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMC45NSAtMzEuMjcpIi8+PHBhdGggZD0iTTIzOC45MSw2Ny43NGE4LjY5LDguNjksMCwwLDEtMi40OCwzLjc1LDEwLDEwLDAsMCwxLTQuMDgsMi4wNywyMi4yNywyMi4yNywwLDAsMS01LjYzLjY0SDIxOC45VjUwLjA5aDguNDRhMjAuODksMjAuODksMCwwLDEsNS4xMy41OSw5LjM1LDkuMzUsMCwwLDEsMy45MSwyLDkuMTEsOS4xMSwwLDAsMSwyLjQ4LDMuNjcsMTUuODgsMTUuODgsMCwwLDEsLjg4LDUuNjhBMTcuMjYsMTcuMjYsMCwwLDEsMjM4LjkxLDY3Ljc0Wm0tNi4zMi04LjQ5YTQuNjIsNC42MiwwLDAsMC0uOTUtMiwzLjg1LDMuODUsMCwwLDAtMS43Mi0xLjEyLDguMjIsOC4yMiwwLDAsMC0yLjYyLS4zNmgtMS42NVY2OC40OGgxLjQ1YTkuNCw5LjQsMCwwLDAsMi42NS0uMzMsNCw0LDAsMCwwLDEuODEtMS4wNyw0LjMyLDQuMzIsMCwwLDAsMS0yLDEyLjUsMTIuNSwwLDAsMCwuMzEtM0ExMi4yMywxMi4yMywwLDAsMCwyMzIuNTksNTkuMjVaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMzAuOTUgLTMxLjI3KSIvPjxwYXRoIGQ9Ik0yNzEuNTIsNzQuMTlWNjQuNjlIMjY0djkuNTFIMjU3LjJWNTAuMDlIMjY0djguNzhoNy41MVY1MC4wOWg2LjgyVjc0LjE5aC02LjgyWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTMwLjk1IC0zMS4yNykiLz48cGF0aCBkPSJNMjk5LjgzLDc0LjE5TDI5OC41Myw3MGgtNy4yM0wyOTAsNzQuMTloLTcuMTZsOC43NS0yNC4xMWg2Ljc1bDguNzUsMjQuMTFoLTcuMjNabS0zLjM3LTExLjEycS0wLjMxLTEuMTctLjU1LTJsLTAuNDMtMS41NXEtMC4xOS0uNjktMC4zMy0xLjI2VDI5NC45MSw1N3EtMC4xLjYyLS4yNCwxLjIxdC0wLjMzLDEuMjdsLTAuNDMsMS41NS0wLjU1LDItMC40NSwxLjU4aDRaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMzAuOTUgLTMxLjI3KSIvPjxwYXRoIGQ9Ik0zMjAuNzEsNTUuOTFWNzQuMTlIMzE0VjU1LjkxaC02Ljc1VjUwLjA5aDIwLjE4djUuODJoLTYuNzVaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMzAuOTUgLTMxLjI3KSIvPjxwYXRoIGQ9Ik0zMzYuNDEsNTQuMjZhMywzLDAsMCwxLTEuNjQsMS42NCwzLjMyLDMuMzIsMCwwLDEtMi40NiwwLDMsMywwLDAsMS0xLjY0LTEuNjQsMy4zMywzLjMzLDAsMCwxLDAtMi40NiwzLDMsMCwwLDEsMS42NC0xLjY0LDMuMzIsMy4zMiwwLDAsMSwyLjQ2LDAsMywzLDAsMCwxLDEuNjQsMS42NEEzLjMxLDMuMzEsMCwwLDEsMzM2LjQxLDU0LjI2Wk0zMzUuOTUsNTJhMi41MSwyLjUxLDAsMCwwLTEuMzgtMS4zOCwyLjc5LDIuNzksMCwwLDAtMi4wNiwwQTIuNTIsMi41MiwwLDAsMCwzMzEuMTMsNTJhMi43OCwyLjc4LDAsMCwwLDAsMi4wNiwyLjUzLDIuNTMsMCwwLDAsMS4zOCwxLjM4LDIuNzksMi43OSwwLDAsMCwyLjA2LDAsMi41MiwyLjUyLDAsMCwwLDEuMzgtMS4zOEEyLjc4LDIuNzgsMCwwLDAsMzM1Ljk1LDUyWm0tMS4yLDFhMSwxLDAsMCwxLS41My4zNGwwLjcsMS4zN2gtMC42OGwtMC42Ni0xLjMxaC0wLjY1djEuMzFoLTAuNThWNTEuMjdoMS40OGExLjQ4LDEuNDgsMCwwLDEsLjQyLjA2LDEsMSwwLDAsMSwuMzUuMTksMC44OSwwLjg5LDAsMCwxLC4yNC4zMiwxLjA4LDEuMDgsMCwwLDEsLjA5LjQ2QTEsMSwwLDAsMSwzMzQuNzUsNTIuOTVabS0wLjUzLTFhMC42MSwwLjYxLDAsMCwwLS4zOS0wLjEyaC0wLjl2MWgwLjlhMC42MywwLjYzLDAsMCwwLC4zOS0wLjEyQTAuNSwwLjUsMCwwLDAsMzM0LjIyLDUyWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTMwLjk1IC0zMS4yNykiLz48cGF0aCBkPSJNMTk2LjU4LDEwNi42M2ExOCwxOCwwLDAsMS0zLjA3LDUuOTIsMTQuMjIsMTQuMjIsMCwwLDEtNC43OCwzLjg3LDE0LjMsMTQuMywwLDAsMS0xMi4yNywwLDEzLjc1LDEzLjc1LDAsMCwxLTQuNzMtMy44NSwxOCwxOCwwLDAsMS0zLTUuODksMjUuMTcsMjUuMTcsMCwwLDEtMS4wNi03LjQ5LDI0Ljg1LDI0Ljg1LDAsMCwxLDEuMDgtNy41MiwxOC4yOSwxOC4yOSwwLDAsMSwzLTUuOTIsMTQsMTQsMCwwLDEsNC43NS0zLjg3LDE0LjMxLDE0LjMxLDAsMCwxLDEyLjI3LDAsMTMuNzgsMTMuNzgsMCwwLDEsNC43MywzLjg1LDE4LjM3LDE4LjM3LDAsMCwxLDMsNS44OSwyNC42MiwyNC42MiwwLDAsMSwxLjA4LDcuNDlBMjQuODcsMjQuODcsMCwwLDEsMTk2LjU4LDEwNi42M1pNMTkyLjc4LDkzYTE1LjM0LDE1LjM0LDAsMCwwLTIuMzUtNC43NSwxMC41MywxMC41MywwLDAsMC0zLjUxLTMsOS4zLDkuMywwLDAsMC00LjM5LTEuMDYsOSw5LDAsMCwwLTQuMzEsMS4wNiwxMC4zNCwxMC4zNCwwLDAsMC0zLjQ0LDMsMTQuOTMsMTQuOTMsMCwwLDAtMi4yNyw0LjcsMjEuNSwyMS41LDAsMCwwLS44Myw2LjE3LDIwLjg5LDIwLjg5LDAsMCwwLC44NSw2LjE3LDE1LjY5LDE1LjY5LDAsMCwwLDIuMzMsNC43NSwxMC4yNiwxMC4yNiwwLDAsMCwzLjQ5LDMsOS4yOSw5LjI5LDAsMCwwLDQuMzksMS4wNiw5LjE4LDkuMTgsMCwwLDAsNC4zNC0xLjA2LDEwLjI0LDEwLjI0LDAsMCwwLDMuNDYtMywxNSwxNSwwLDAsMCwyLjI3LTQuNywyMS41NSwyMS41NSwwLDAsMCwuODMtNi4xN0EyMC45LDIwLjksMCwwLDAsMTkyLjc4LDkzWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTMwLjk1IC0zMS4yNykiLz48cGF0aCBkPSJNMjMxLjMyLDk2LjY2YTkuODMsOS44MywwLDAsMS0yLjUxLDMuNTEsMTAuNTYsMTAuNTYsMCwwLDEtMy44NywyLjE0LDE2LjI2LDE2LjI2LDAsMCwxLTUsLjcySDIxMS4ydjE0LjIxaC00VjgxLjA4aDEzLjU0YTE1LjQ2LDE1LjQ2LDAsMCwxLDQuNTcuNjUsMTAsMTAsMCwwLDEsMy42NCwyLDkuMjQsOS4yNCwwLDAsMSwyLjQzLDMuMzhBMTMuMjYsMTMuMjYsMCwwLDEsMjMxLjMyLDk2LjY2Wm0tNS4wOS0xMGE3Ljg5LDcuODksMCwwLDAtNS42OC0xLjg5SDIxMS4yVjk5LjM3SDIyMHE4LjE2LDAsOC4xNi03LjM0QTcuMTQsNy4xNCwwLDAsMCwyMjYuMjMsODYuNjRaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMzAuOTUgLTMxLjI3KSIvPjxwYXRoIGQ9Ik0yNDAuNjUsMTE3LjI1VjgxLjA4SDI2Mi41djMuNjdIMjQ0LjY4Vjk2LjEySDI1NXYzLjY3SDI0NC42OHYxMy43OWgxOC42djMuNjdIMjQwLjY1WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTMwLjk1IC0zMS4yNykiLz48cGF0aCBkPSJNMjk0Ljc5LDExNy4yNUwyNzksOTIuNXEtMC4zMS0uNDYtMC42Ny0xLjExbC0wLjcyLTEuMjlxLTAuMzYtLjY1LTAuNy0xLjIxYTguNTEsOC41MSwwLDAsMS0uNDktMC45M3YyOS4yOWgtMy45M1Y4MS4wOGgzLjkzbDE1LjY1LDI1LjIxcTAuMzEsMC40Ny42NywxLjExbDAuNzIsMS4yOXEwLjM2LDAuNjUuNywxLjIxYTguNDUsOC40NSwwLDAsMSwuNDkuOTNWODEuMDhoMy45M3YzNi4xNmgtMy44MloiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMC45NSAtMzEuMjcpIi8+PHBhdGggZD0iTTMzMSwxMTEuNzJhOC44LDguOCwwLDAsMS0yLjM1LDMuMiwxMS40NCwxMS40NCwwLDAsMS0zLjc3LDIuMTIsMTUuMzMsMTUuMzMsMCwwLDEtNS4wNi43OCwxNi4zNSwxNi4zNSwwLDAsMS02Ljg1LTEuNDIsMTcuODEsMTcuODEsMCwwLDEtNS4yOS0zLjU5bDIuNjktM2ExOC4zNCwxOC4zNCwwLDAsMCw0LjQ0LDMuMTUsMTEuMzgsMTEuMzgsMCwwLDAsNS4xNywxLjE5LDksOSwwLDAsMCw1LjcxLTEuNjUsNS40Nyw1LjQ3LDAsMCwwLDIuMDktNC41NSw2LjA3LDYuMDcsMCwwLDAtLjQxLTIuMjcsNS4wNSw1LjA1LDAsMCwwLTEuNDItMS45MSwxMy40MiwxMy40MiwwLDAsMC0yLjY2LTEuNzMsMzMuODQsMzMuODQsMCwwLDAtNC4xMy0xLjczLDM2LDM2LDAsMCwxLTQuOTMtMi4wOSwxMy40LDEzLjQsMCwwLDEtMy4yLTIuMjcsNy4zNSw3LjM1LDAsMCwxLTEuNzYtMi43MSwxMC4xNSwxMC4xNSwwLDAsMS0uNTQtMy40Niw4Ljc3LDguNzcsMCwwLDEsLjgzLTMuODcsOC42MSw4LjYxLDAsMCwxLDIuMy0yLjkyLDEwLDEwLDAsMCwxLDMuNTctMS44MywxNi4yMiwxNi4yMiwwLDAsMSw0LjYyLS42MiwxNi40OCwxNi40OCwwLDAsMSw2LjE3LDEsMTkuNDksMTkuNDksMCwwLDEsNC44MywyLjg0bC0yLjU4LDMuMTVhMTYsMTYsMCwwLDAtNC0yLjUxLDEyLDEyLDAsMCwwLTQuNzMtLjg1LDEwLjM2LDEwLjM2LDAsMCwwLTMuMi40NCw2LjQ1LDYuNDUsMCwwLDAtMi4yLDEuMTYsNC4zMSw0LjMxLDAsMCwwLTEuMjQsMS42OCw1LjM3LDUuMzcsMCwwLDAtLjM5LDIsNi4yNSw2LjI1LDAsMCwwLC4zMSwyLDQuMzQsNC4zNCwwLDAsMCwxLjI0LDEuNzZBMTEuMTksMTEuMTksMCwwLDAsMzE2LjkzLDk1YTQzLjQsNDMuNCwwLDAsMCw0LjQyLDEuODEsMzgsMzgsMCwwLDEsNSwyLjE3LDEyLjU1LDEyLjU1LDAsMCwxLDMuMjMsMi4zOCw3LjY4LDcuNjgsMCwwLDEsMS43MywyLjg0LDExLjI5LDExLjI5LDAsMCwxLC41MiwzLjU3QTkuOTQsOS45NCwwLDAsMSwzMzEsMTExLjcyWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTMwLjk1IC0zMS4yNykiLz48cGF0aCBkPSJNMzYzLjc2LDExNy4yNXYtMTdoLTE4djE3aC00VjgxLjA4aDRWOTYuNTNoMThWODEuMDhoNHYzNi4xNmgtNFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMC45NSAtMzEuMjcpIi8+PHBhdGggZD0iTTM3OS4xLDExNy4yNVY4MS4wOGg0djM2LjE2aC00WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTMwLjk1IC0zMS4yNykiLz48cGF0aCBkPSJNMzk4LjQ4LDg0Ljc1djEyaDkuOTJ2My42N2gtOS45MnYxNi44NGgtNFY4MS4wOGgyMS4yM3YzLjY3aC0xNy4yWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTMwLjk1IC0zMS4yNykiLz48cGF0aCBkPSJNNDM2Ljc2LDg0Ljc1djMyLjVoLTRWODQuNzVINDIyLjA5VjgxLjA4SDQ0Ny40djMuNjdINDM2Ljc2WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTMwLjk1IC0zMS4yNykiLz48L3N2Zz4=);
-  }
-.logo a {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-*, *:before, *:after {
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-aside,
-footer,
-header,
-hgroup,
-section{
-  display: block;
-}
-body {
-  color: #404040;
-  font-family: "Helvetica Neue",Helvetica,"Liberation Sans",Arial,sans-serif;
-  font-size: 14px;
-  line-height: 1.4;
-}
-
-html {
-  font-family: sans-serif;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-}
-ul {
-    margin-top: 0;
-}
-.container {
-  margin-right: auto;
-  margin-left: auto;
-  padding-left: 15px;
-  padding-right: 15px;
-}
-.container:before,
-.container:after {
-  content: " ";
-  /* 1 */
-
-  display: table;
-  /* 2 */
-
-}
-.container:after {
-  clear: both;
-}
-.row {
-  margin-left: -15px;
-  margin-right: -15px;
-}
-.row:before,
-.row:after {
-  content: " ";
-  /* 1 */
-
-  display: table;
-  /* 2 */
-
-}
-.row:after {
-  clear: both;
-}
-.col-sm-6, .col-md-6, .col-xs-12 {
-  position: relative;
-  min-height: 1px;
-  padding-left: 15px;
-  padding-right: 15px;
-}
-.col-xs-12 {
-  width: 100%;
-}
-
-@media (min-width: 768px) {
-  .container {
-    width: 750px;
-  }
-  .col-sm-6 {
-    float: left;
-  }
-  .col-sm-6 {
-    width: 50%;
-  }
-}
-
-@media (min-width: 992px) {
-  .container {
-    width: 970px;
-  }
-  .col-md-6 {
-    float: left;
-  }
-  .col-md-6 {
-    width: 50%;
-  }
-}
-@media (min-width: 1200px) {
-  .container {
-    width: 1170px;
-  }
-}
-
-a {
-  color: #069;
-  text-decoration: none;
-}
-a:hover {
-  color: #EA0011;
-  text-decoration: underline;
-}
-hgroup {
-  margin-top: 50px;
-}
-footer {
-    margin: 50px 0 25px;
-}
-h1, h2, h3 {
-  color: #000;
-  line-height: 1.38em;
-  margin: 1.5em 0 .3em;
-}
-h1 {
-  font-size: 25px;
-  font-weight: 300;
-  border-bottom: 1px solid #fff;
-  margin-bottom: .5em;
-}
-h1:after {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 1px;
-  background-color: #ddd;
-}
-h2 {
-  font-size: 19px;
-  font-weight: 400;
-}
-h3 {
-  font-size: 15px;
-  font-weight: 400;
-  margin: 0 0 .3em;
-}
-p {
-  margin: 0 0 2em;
-  text-align: justify;
-}
-p + h2 {
-  margin-top: 2em;
-}
-html {
-  background: #f5f5f5;
-  height: 100%;
-}
-code {
-  background-color: white;
-  border: 1px solid #ccc;
-  padding: 1px 5px;
-  color: #888;
-}
-pre {
-  display: block;
-  padding: 13.333px 20px;
-  margin: 0 0 20px;
-  font-size: 13px;
-  line-height: 1.4;
-  background-color: #fff;
-  border-left: 2px solid rgba(120,120,120,0.35);
-  white-space: pre;
-  white-space: pre-wrap;
-  word-break: normal;
-  word-wrap: break-word;
-  overflow: auto;
-  font-family: Menlo,Monaco,"Liberation Mono",Consolas,monospace !important;
-}
-
-.warning { color: orange }
-
-</style>
-
+	<!-- Mobile Specific Meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Favicon-->
+	<link rel="shortcut icon" href="img/fav.png">
+	<!-- Author Meta -->
+	<meta name="author" content="colorlib">
+	<!-- Meta Description -->
+	<meta name="description" content="">
+	<!-- Meta Keyword -->
+	<meta name="keywords" content="">
+	<!-- meta character set -->
+	<meta charset="UTF-8">
+	<!-- Site Title -->
+	<title>Smashed Magazine</title>
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600|Roboto:400,600" rel="stylesheet">
+	<!--
+		CSS
+		============================================= -->
+	<link rel="stylesheet" href="css/linearicons.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/magnific-popup.css">
+	<link rel="stylesheet" href="css/nice-select.css">
+	<link rel="stylesheet" href="css/animate.min.css">
+	<link rel="stylesheet" href="css/owl.carousel.css">
+	<link rel="stylesheet" href="css/jquery-ui.css">
+	<link rel="stylesheet" href="css/main.css">
 </head>
+
 <body>
 
-<section class='container'>
-          <hgroup>
-            <h1>Welcome to your Django application on OpenShift</h1>
-          </hgroup>
+	<!-- Start Banner Area -->
+	<section class="banner-area">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-3 col-md-12">
+					<div class="row">
+						<div class="col-lg-12 col-md-4 col-sm-6">
+							<div class="single-post mb-03">
+								<div class="thumb">
+									<div class="relative">
+										<img class="f-img img-fluid mx-auto" src="img/banner/lb1.jpg" alt="">
+										<div class="overlay overlay-bg"></div>
+									</div>
+								</div>
+								<div class="details">
+									<div class="bottom d-flex justify-content-between align-items-center flex-wrap">
+										<div>
+											<a href="#" class="primary-btn">gadgets</a>
+											<a href="#"><span>September 14, 2018</span></a>
+										</div>
+										<div class="meta">
+											<span class="lnr lnr-bubble"></span> 04
+										</div>
+									</div>
+									<a href="#">
+										<h4>2nd Gen Smoke CO Alarm</h4>
+									</a>
+									<p>
+										Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.
+										Consectetur adipisicing elit sed do eiusmod tempor.
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-12 col-md-4 col-sm-6">
+							<div class="single-post mb-03">
+								<div class="thumb">
+									<div class="relative">
+										<img class="f-img img-fluid mx-auto" src="img/banner/lb2.jpg" alt="">
+										<div class="overlay overlay-bg"></div>
+									</div>
+								</div>
+								<div class="details">
+									<div class="bottom d-flex justify-content-between align-items-center flex-wrap">
+										<div>
+											<a href="#" class="primary-btn">gadgets</a>
+											<a href="#"><span>September 14, 2018</span></a>
+										</div>
+										<div class="meta">
+											<span class="lnr lnr-bubble"></span> 04
+										</div>
+									</div>
+									<a href="#">
+										<h4>2nd Gen Smoke CO Alarm</h4>
+									</a>
+									<p>
+										Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.
+										Consectetur adipisicing elit sed do eiusmod tempor.
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-12 col-md-4 col-sm-6">
+							<div class="single-post">
+								<div class="thumb">
+									<div class="relative">
+										<img class="f-img img-fluid mx-auto" src="img/banner/lb3.jpg" alt="">
+										<div class="overlay overlay-bg"></div>
+									</div>
+								</div>
+								<div class="details">
+									<div class="bottom d-flex justify-content-between align-items-center flex-wrap">
+										<div>
+											<a href="#" class="primary-btn">gadgets</a>
+											<a href="#"><span>September 14, 2018</span></a>
+										</div>
+										<div class="meta">
+											<span class="lnr lnr-bubble"></span> 04
+										</div>
+									</div>
+									<a href="#">
+										<h4>2nd Gen Smoke CO Alarm</h4>
+									</a>
+									<p>
+										Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.
+										Consectetur adipisicing elit sed do eiusmod tempor.
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 
+				<div class="col-lg-6 col-md-8 owl-carousel active-banner">
+					<div class="single-post">
+						<div class="thumb">
+							<div class="relative">
+								<img class="f-img img-fluid mx-auto" src="img/banner/bc1.jpg" alt="">
+								<div class="overlay overlay-bg"></div>
+							</div>
+						</div>
+						<div class="details">
+							<div class="bottom d-flex justify-content-start align-items-center flex-wrap">
+								<div>
+									<a href="#" class="primary-btn">gadgets</a>
+									<a href="#"><span>September 14, 2018</span></a>
+								</div>
+								<div class="meta">
+									<span class="lnr lnr-bubble"></span> 04
+								</div>
+							</div>
+							<a href="#">
+								<h4 class="lg-font">Nest Protect: 2nd Gen Smoke <br>
+									+ CO Alarm</h4>
+							</a>
+							<p>
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore. Lorem
+								ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.
+							</p>
+							<a href="#" class="primary-btn fill mt-30">read more</a>
+						</div>
+					</div>
 
-        <div class="row">
-          <section class='col-xs-12 col-sm-6 col-md-6'>
-            <section>
-              <h2>How to use this example application</h2>
-                <p>For instructions on how to use this application with OpenShift, start by reading the <a href="http://docs.okd.io/latest/dev_guide/templates.html#using-the-quickstart-templates">Developer Guide</a>.</p>
+					<div class="single-post">
+						<div class="thumb">
+							<div class="relative">
+								<img class="f-img img-fluid mx-auto" src="img/banner/bc1.jpg" alt="">
+								<div class="overlay overlay-bg"></div>
+							</div>
+						</div>
+						<div class="details">
+							<div class="bottom d-flex justify-content-start align-items-center flex-wrap">
+								<div>
+									<a href="#" class="primary-btn">gadgets</a>
+									<a href="#"><span>September 14, 2018</span></a>
+								</div>
+								<div class="meta">
+									<span class="lnr lnr-bubble"></span> 04
+								</div>
+							</div>
+							<a href="#">
+								<h4 class="lg-font">Nest Protect: 2nd Gen Smoke <br>
+									+ CO Alarm</h4>
+							</a>
+							<p>
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore. Lorem
+								ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.
+							</p>
+							<a href="#" class="primary-btn fill mt-30">read more</a>
+						</div>
+					</div>
+				</div>
 
-              <h2>Deploying code changes</h2>
-                <p>
-                  The source code for this application is available to be forked from the <a href="https://www.github.com/sclorg/django-ex">OpenShift GitHub repository</a>.
-                  You can configure a webhook in your repository to make OpenShift automatically start a build whenever you push your code:
-                </p>
+				<div class="col-lg-3 col-md-4">
+					<div class="row">
+						<div class="col-lg-12 col-md-12 col-sm-6">
+							<div class="single-post mb-03">
+								<div class="thumb">
+									<div class="relative">
+										<img class="f-img img-fluid mx-auto" src="img/banner/br2.jpg" alt="">
+										<div class="overlay overlay-bg"></div>
+									</div>
+								</div>
+								<div class="details">
+									<div class="top-part d-flex justify-content-between">
+										<div>
+											<h4>United States</h4>
+											<p>Saturday, September 08, 2018</p>
+										</div>
+										<div>
+											<span class="lnr lnr-arrow-down text-white"></span>
+										</div>
+									</div>
+									<div class="middle-part">
+										<h1>28ºC</h1>
+										<p>Partly Cloudy</p>
+									</div>
 
-<ol>
-  <li>From the Web Console homepage, navigate to your project</li>
-  <li>Click on Browse &gt; Builds</li>
-  <li>Click the link with your BuildConfig name</li>
-  <li>Click the Configuration tab</li>
-  <li>Click the "Copy to clipboard" icon to the right of the "GitHub webhook URL" field</li>
-  <li>Navigate to your repository on GitHub and click on repository settings &gt; webhooks &gt; Add webhook</li>
-  <li>Paste your webhook URL provided by OpenShift</li>
-  <li>Leave the defaults for the remaining fields &mdash; that's it!</li>
-</ol>
-<p>After you save your webhook, if you refresh your settings page you can see the status of the ping that Github sent to OpenShift to verify it can reach the server.</p>
-<p>Note: adding a webhook requires your OpenShift server to be reachable from GitHub.</p>
+									<div class="bottom-part">
+										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-12 col-md-12 col-sm-6">
+							<div class="single-post">
+								<div class="thumb">
+									<div class="relative">
+										<img class="f-img img-fluid mx-auto" src="img/banner/br1.jpg" alt="">
+										<div class="overlay overlay-bg"></div>
+									</div>
+								</div>
+								<div class="details">
+									<div class="bottom d-flex justify-content-between">
+										<div>
+											<h4 class="mt-0">Recent Music Playlist</h4>
+											<p>Selected by techmania</p>
+										</div>
+										<div>
+											<span class="lnr lnr-arrow-down text-white"></span>
+										</div>
+									</div>
+									<ul class="list">
+										<li>
+											<a href="#">
+												Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End Banner Area -->
 
-                <h3>Working in your local Git repository</h3>
-                <p>If you forked the application from the OpenShift GitHub example, you'll need to manually clone the repository to your local system. Copy the application's source code Git URL and then run:</p>
+	<!-- Start Header Area -->
+	<header>
+		<div class="main-menu" id="main-menu">
+			<div class="container">
+				<div class="row align-items-center justify-content-between">
+					<div>
+						<a class="navbar-brand" href="index.html">
+							<img src="img/logo.png" alt="">
+						</a>
+					</div>
+					<nav id="nav-menu-container" class="ml-auto">
+							<ul class="nav-menu">
+								<li class="menu-active"><a href="index.html">Home</a></li>
+								<li><a href="archive.html">Archive</a></li>
+								<li><a href="category.html">Category</a></li>
+								<li class="menu-has-children"><a href="">Pages</a>
+									<ul>
+										<li><a href="post-details.html">Post Details</a></li>
+										<li><a href="elements.html">Elements</a></li>
+									</ul>
+								</li>
+								<li><a href="contact.html">Contact</a></li>
+							</ul>
+						</nav>
+					<div class="navbar-right ml-auto">
+						<form class="Search">
+							<input type="text" class="form-control Search-box" name="Search-box" id="Search-box" placeholder="Search">
+							<label for="Search-box" class="Search-box-label">
+								<span class="lnr lnr-magnifier"></span>
+							</label>
+							<span class="Search-close">
+								<span class="lnr lnr-cross"></span>
+							</span>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<!-- End Header Area -->
 
-<pre>$ git clone &lt;git_url&gt; &lt;directory_to_create&gt;
+	<!-- Start Editors Pick Area -->
+	<section class="editors-area">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-3 col-md-3 col-sm-6">
+					<div class="single-post d-flex single-post2 mb-40">
+						<div class="thumb">
+							<div class="relative">
+								<img class="f-img img-fluid mx-auto" src="img/editors-pick/e1.jpg" alt="">
+							</div>
+						</div>
+						<div class="">
+							<div class="bottom">
+								<div>
+									<a href="#" class="primary-btn">gadgets</a>
+									<a href="#"><span>September 14, 2018</span></a>
+								</div>
+							</div>
+							<a href="#">
+								<h4>2nd Gen Smoke CO Alarm time <br>
+									to get up from sleep</h4>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-6">
+					<div class="single-post d-flex single-post2 mb-40">
+						<div class="thumb">
+							<div class="relative">
+								<img class="f-img img-fluid mx-auto" src="img/editors-pick/e2.jpg" alt="">
+							</div>
+						</div>
+						<div class="">
+							<div class="bottom">
+								<div>
+									<a href="#" class="primary-btn">gadgets</a>
+									<a href="#"><span>September 14, 2018</span></a>
+								</div>
+							</div>
+							<a href="#">
+								<h4>2nd Gen Smoke CO Alarm time <br>
+									to get up from sleep</h4>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-6">
+					<div class="single-post d-flex single-post2">
+						<div class="thumb">
+							<div class="relative">
+								<img class="f-img img-fluid mx-auto" src="img/editors-pick/e3.jpg" alt="">
+							</div>
+						</div>
+						<div class="">
+							<div class="bottom">
+								<div>
+									<a href="#" class="primary-btn">gadgets</a>
+									<a href="#"><span>September 14, 2018</span></a>
+								</div>
+							</div>
+							<a href="#">
+								<h4>2nd Gen Smoke CO Alarm time <br>
+									to get up from sleep</h4>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-6">
+					<div class="single-post d-flex single-post2">
+						<div class="thumb">
+							<div class="relative">
+								<img class="f-img img-fluid mx-auto" src="img/editors-pick/e4.jpg" alt="">
+							</div>
+						</div>
+						<div class="">
+							<div class="bottom">
+								<div>
+									<a href="#" class="primary-btn">gadgets</a>
+									<a href="#"><span>September 14, 2018</span></a>
+								</div>
+							</div>
+							<a href="#">
+								<h4>2nd Gen Smoke CO Alarm time <br>
+									to get up from sleep</h4>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End Editors Pick Area -->
 
-# Within your project directory
-# Commit your changes and push to OpenShift
+	<!-- Start International News Area -->
+	<section class="int-news-area section-gap-top">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 col-md-12">
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="section-title">
+								<h2 class="heading">International News</h2>
+							</div>
+						</div>
+					</div>
 
-$ git commit -a -m 'Some commit message'
-$ git push</pre>
+					<div class="row">
+						<div class="col-lg-7 col-md-8">
+							<div class="single-post single-int mb-40">
+								<div class="thumb">
+									<div class="relative">
+										<img class="f-img w-100 img-fluid mx-auto" src="img/int-news/i1.jpg" alt="">
+									</div>
+								</div>
+								<div class="">
+									<div class="bottom pt-30 d-flex justify-content-between align-items-center flex-wrap">
+										<div>
+											<a href="#" class="primary-btn">gadgets</a>
+											<a href="#"><span>September 14, 2018</span></a>
+										</div>
+										<div class="meta">
+											<span class="lnr lnr-bubble"></span> 04
+										</div>
+									</div>
+									<a href="#">
+										<h4>Dealing With Technical Support with Printing Is Very
+											Appealing Comp 10 Useful Tips</h4>
+									</a>
+									<p>
+										It won’t be a bigger problem to find one video game lover in your neighbor. Since the introduction of Virtual
+										Game, it has beenachieving great heights so far as its popularity and technological advancement are
+										concerned.
+										The history of video game is as interesting as a fairy tale. The quality of today’s video game was not at all
+										there when video game first conceptualized and played ever
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-5 col-md-12">
+							<div class="row">
+								<div class="col-lg-12 col-md-6 col-sm-6">
+									<div class="single-post single-int mb-40">
+										<div class="thumb">
+											<div class="relative">
+												<img class="f-img w-100 img-fluid mx-auto" src="img/int-news/i2.jpg" alt="">
+											</div>
+										</div>
+										<div class="">
+											<div class="bottom mt-10">
+												<div>
+													<a href="#" class="primary-btn">gadgets</a>
+													<a href="#"><span>September 14, 2018</span></a>
+												</div>
+											</div>
+											<a href="#">
+												<h4 class="mt-15">Facts Why Inkjet Printing Is Very
+													Appealing Compared</h4>
+											</a>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-12 col-md-6 col-sm-6">
+									<div class="single-post single-int mb-40">
+										<div class="thumb">
+											<div class="relative">
+												<img class="f-img w-100 img-fluid mx-auto" src="img/int-news/i3.jpg" alt="">
+											</div>
+										</div>
+										<div class="">
+											<div class="bottom mt-10">
+												<div>
+													<a href="#" class="primary-btn">gadgets</a>
+													<a href="#"><span>September 14, 2018</span></a>
+												</div>
+											</div>
+											<a href="#">
+												<h4>Facts Why Inkjet Printing Is Very
+													Appealing Compared</h4>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 
-<p>After pushing changes, you'll need to manually trigger a build if you did not setup a webhook as described above.</p>
+				<div class="col-lg-4">
+					<div class="ad-widget-wrap">
+						<img src="img/ad-300-600.jpg" alt="">
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End International News Area -->
 
-                  <h3>Expanding on sample app</h3>
-                  <p>This project has just a skeleton for you to get started. It includes:</p>
-                  <ol>
-                    <li>Django project created with <code>python manage.py startproject project .</code></li>
-                    <li>Appropriate database configuration</li>
-                    <li>Sample Django app created with <code>python manage.py startapp welcome</code></li>
-                  </ol>
-                  <p>
-                    Now it is time to add your own code.
-                    Follow along the <a href="https://docs.djangoproject.com/en/1.11/intro/tutorial01/">Django tutorial</a> to learn more about Django.
-                  </p>
-                  <p>
-                    If you are running Django's development server in your local host, you can see more information
-                    about this request using the toolbar on the right.<br>
-                    Please note that by default your Django settings have <code>DEBUG = True</code> and that is not appropriate for production use,
-                    but very handy during development.<br>
-                    Refer to the <a href="https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/">Deployment Checklist</a>
-                    before taking this project into a production environment.
-                  </p>
+	<!-- Start Technology News Area -->
+	<section class="tech-news-area section-gap-top-60">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="section-title">
+						<h2 class="heading">Technology News</h2>
+					</div>
+				</div>
+			</div>
 
-            </section>
+			<div class="row">
+				<div class="col-lg-3 col-md-5 col-sm-6">
+					<div class="single-post single-int mb-40">
+						<div class="thumb">
+							<div class="relative">
+								<img class="f-img img-fluid mx-auto" src="img/tech-news/t1.jpg" alt="">
+							</div>
+						</div>
+						<div class="">
+							<div class="bottom mt-10">
+								<div>
+									<a href="#" class="primary-btn">gadgets</a>
+									<a href="#"><span>September 14, 2018</span></a>
+								</div>
+							</div>
+							<a href="#">
+								<h4>Facts Why Inkjet Printing Is
+									Appealing Compared</h4>
+							</a>
+						</div>
+					</div>
+				</div>
 
-          </section>
-          <section class="col-xs-12 col-sm-6 col-md-6">
+				<div class="col-lg-3 col-md-5 col-sm-6">
+					<div class="single-post single-int mb-40">
+						<div class="thumb">
+							<div class="relative">
+								<img class="f-img img-fluid mx-auto" src="img/tech-news/t2.jpg" alt="">
+								<a class="play-btn" href="https://www.youtube.com/watch?v=ARA0AxrnHdM">
+									<img src="img/play-icon.png" class="vdo-btn" alt="">
+								</a>
+							</div>
+						</div>
+						<div class="">
+							<div class="bottom mt-10">
+								<div>
+									<a href="#" class="primary-btn">gadgets</a>
+									<a href="#"><span>September 14, 2018</span></a>
+								</div>
+							</div>
+							<a href="#">
+								<h4>Facts Why Inkjet Printing Is
+									Appealing Compared</h4>
+							</a>
+						</div>
+					</div>
+				</div>
 
-                <h2>Managing your application</h2>
+				<div class="col-lg-3 col-md-5 col-sm-6">
+					<div class="single-post single-int mb-40">
+						<div class="thumb">
+							<div class="relative">
+								<img class="f-img img-fluid mx-auto" src="img/tech-news/t3.jpg" alt="">
+							</div>
+						</div>
+						<div class="">
+							<div class="bottom mt-10">
+								<div>
+									<a href="#" class="primary-btn">gadgets</a>
+									<a href="#"><span>September 14, 2018</span></a>
+								</div>
+							</div>
+							<a href="#">
+								<h4>Facts Why Inkjet Printing Is
+									Appealing Compared</h4>
+							</a>
+						</div>
+					</div>
+				</div>
 
-                <p>Documentation on how to manage your application from the Web Console or Command Line is available at the <a href="http://docs.okd.io/latest/dev_guide/overview.html">Developer Guide</a>.</p>
+				<div class="col-lg-3 col-md-5 col-sm-6">
+					<div class="single-post single-int mb-40">
+						<div class="thumb">
+							<div class="relative">
+								<img class="f-img img-fluid mx-auto" src="img/tech-news/t4.jpg" alt="">
+								<a class="play-btn" href="https://www.youtube.com/watch?v=ARA0AxrnHdM">
+									<img src="img/play-icon.png" class="vdo-btn" alt="">
+								</a>
+							</div>
+						</div>
+						<div class="">
+							<div class="bottom mt-10">
+								<div>
+									<a href="#" class="primary-btn">gadgets</a>
+									<a href="#"><span>September 14, 2018</span></a>
+								</div>
+							</div>
+							<a href="#">
+								<h4>Facts Why Inkjet Printing Is
+									Appealing Compared</h4>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End Technology News Area -->
 
-                <h3>Web Console</h3>
-                <p>You can use the Web Console to view the state of your application components and launch new builds.</p>
+	<!-- Start Exclusive Videos Area -->
+	<section class="excl-vdo-area section-gap-top-60">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="section-title">
+						<h2 class="heading">Exclusive Videos</h2>
+					</div>
+				</div>
+			</div>
 
-                <h3>Command Line</h3>
-                <p>With the <a href="http://docs.okd.io/latest/cli_reference/overview.html">OpenShift command line interface</a> (CLI), you can create applications and manage projects from a terminal.</p>
+			<div class="row">
+				<div class="col-lg-12 owl-carousel active-banner">
+					<div class="single-post">
+						<div class="thumb">
+							<div class="relative">
+								<img class="f-img img-fluid mx-auto" src="img/exclusive-videos/e1.jpg" alt="">
+								<div class="overlay overlay-bg"></div>
+							</div>
+						</div>
+						<div class="details">
+							<div class="bottom d-flex justify-content-start align-items-center flex-wrap">
+								<div>
+									<a href="#" class="primary-btn">gadgets</a>
+									<a href="#"><span>September 14, 2018</span></a>
+								</div>
+								<div class="meta">
+									<span class="lnr lnr-bubble"></span> 04
+								</div>
+							</div>
+							<a href="#">
+								<h4 class="lg-font">Nest Protect: 2nd Gen Smoke
+									+ CO Alarm</h4>
+							</a>
+							<p>
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore. Lorem
+								ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.
+							</p>
+							<a class="play-btn" href="https://www.youtube.com/watch?v=ARA0AxrnHdM">
+								<img src="img/video-icon.jpg" class="mt-30" alt="">
+							</a>
+						</div>
+					</div>
 
-                <h2>Development Resources</h2>
-                  <ul>
-                    <li><a href="http://docs.okd.io/latest/welcome/index.html">OpenShift Documentation</a></li>
-                    <li><a href="https://github.com/openshift/origin">Openshift Origin GitHub</a></li>
-                    <li><a href="https://github.com/openshift/source-to-image">Source To Image GitHub</a></li>
-                    <li><a href="http://docs.okd.io/latest/using_images/s2i_images/python.html">Getting Started with Python on OpenShift</a></li>
-                    <li><a href="http://stackoverflow.com/questions/tagged/openshift">Stack Overflow questions for OpenShift</a></li>
-                    <li><a href="http://git-scm.com/documentation">Git documentation</a></li>
-                  </ul>
+					<div class="single-post">
+						<div class="thumb">
+							<div class="relative">
+								<img class="f-img img-fluid mx-auto" src="img/exclusive-videos/e1.jpg" alt="">
+								<div class="overlay overlay-bg"></div>
+							</div>
+						</div>
+						<div class="details">
+							<div class="bottom d-flex justify-content-start align-items-center flex-wrap">
+								<div>
+									<a href="#" class="primary-btn">gadgets</a>
+									<a href="#"><span>September 14, 2018</span></a>
+								</div>
+								<div class="meta">
+									<span class="lnr lnr-bubble"></span> 04
+								</div>
+							</div>
+							<a href="#">
+								<h4 class="lg-font">Nest Protect: 2nd Gen Smoke
+									+ CO Alarm</h4>
+							</a>
+							<p>
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore. Lorem
+								ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.
+							</p>
+							<a class="play-btn" href="https://www.youtube.com/watch?v=ARA0AxrnHdM">
+								<img src="img/video-icon.jpg" class="mt-30" alt="">
+							</a>
+						</div>
+					</div>
 
-                <h2>Request information</h2>
-<pre>
-Server hostname: {{ hostname }}
-Database server: {{ database.engine }} ({{ database.url }})
-{% if database.is_sqlite %}<span class="warning">Data persistence warning: You are currently using SQLite. This is fine for development, but your data won't be persisted across application deployments.</span>{% endif %}
-Page views: {{ count }}
-</pre>
+					<div class="single-post">
+						<div class="thumb">
+							<div class="relative">
+								<img class="f-img img-fluid mx-auto" src="img/exclusive-videos/e1.jpg" alt="">
+								<div class="overlay overlay-bg"></div>
+							</div>
+						</div>
+						<div class="details">
+							<div class="bottom d-flex justify-content-start align-items-center flex-wrap">
+								<div>
+									<a href="#" class="primary-btn">gadgets</a>
+									<a href="#"><span>September 14, 2018</span></a>
+								</div>
+								<div class="meta">
+									<span class="lnr lnr-bubble"></span> 04
+								</div>
+							</div>
+							<a href="#">
+								<h4 class="lg-font">Nest Protect: 2nd Gen Smoke
+									+ CO Alarm</h4>
+							</a>
+							<p>
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore. Lorem
+								ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.
+							</p>
+							<a class="play-btn" href="https://www.youtube.com/watch?v=ARA0AxrnHdM">
+								<img src="img/video-icon.jpg" class="mt-30" alt="">
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End Exclusive Videos Area -->
 
-          </section>
-        </div>
+	<!-- Start Popular News feed Area -->
+	<section class="popular-news-area">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="section-title">
+						<h2 class="heading">Popular News Feed</h2>
+					</div>
+				</div>
+			</div>
 
-        <footer>
-          <div>Built on</div>
-          <div class="logo"><a href="https://www.openshift.com/"></a></div>
-        </footer>
-</section>
+			<div class="row">
+				<div class="col-lg-3 col-md-6 col-sm-6">
+					<div class="single-post single-int mb-40">
+						<div class="thumb">
+							<div class="relative">
+								<img class="f-img img-fluid mx-auto" src="img/popular-news/p1.jpg" alt="">
+							</div>
+						</div>
+						<div class="">
+							<div class="bottom mt-10 d-flex justify-content-between align-items-center flex-wrap">
+								<div>
+									<a href="#" class="primary-btn">gadgets</a>
+									<a href="#"><span>September 14, 2018</span></a>
+								</div>
+							</div>
+							<a href="#">
+								<h4>Facts Why Inkjet Printing Is Very
+									Appealing Compared</h4>
+							</a>
+						</div>
+					</div>
+					<div class="single-post single-int mb-40">
+						<div class="thumb">
+							<div class="relative">
+								<img class="f-img img-fluid mx-auto" src="img/popular-news/p2.jpg" alt="">
+							</div>
+						</div>
+						<div class="">
+							<div class="bottom mt-10 d-flex justify-content-between align-items-center flex-wrap">
+								<div>
+									<a href="#" class="primary-btn">gadgets</a>
+									<a href="#"><span>September 14, 2018</span></a>
+								</div>
+							</div>
+							<a href="#">
+								<h4>Facts Why Inkjet Printing Is Very
+									Appealing Compared</h4>
+							</a>
+						</div>
+					</div>
+				</div>
 
+				<div class="col-lg-3 col-md-6 col-sm-6">
+					<div class="single-post single-int mb-40">
+						<div class="thumb">
+							<div class="relative">
+								<img class="f-img img-fluid mx-auto" src="img/popular-news/p3.jpg" alt="">
+							</div>
+						</div>
+						<div class="">
+							<div class="bottom mt-10">
+								<div>
+									<a href="#" class="primary-btn">gadgets</a>
+									<a href="#"><span>September 14, 2018</span></a>
+								</div>
+							</div>
+							<a href="#">
+								<h4 class="mt-15">Facts Why Inkjet Printing Is Very
+									Appealing Compared</h4>
+							</a>
+						</div>
+					</div>
+					<div class="single-post single-int mb-40">
+						<div class="thumb">
+							<div class="relative">
+								<img class="f-img img-fluid mx-auto" src="img/popular-news/p4.jpg" alt="">
+							</div>
+						</div>
+						<div class="">
+							<div class="bottom mt-10">
+								<div>
+									<a href="#" class="primary-btn">gadgets</a>
+									<a href="#"><span>September 14, 2018</span></a>
+								</div>
+							</div>
+							<a href="#">
+								<h4>Facts Why Inkjet Printing Is Very
+									Appealing Compared</h4>
+							</a>
+						</div>
+					</div>
+				</div>
 
+				<div class="col-lg-6 col-md-6 col-sm-12">
+					<div class="single-post single-int mb-40">
+						<div class="thumb">
+							<div class="relative">
+								<img class="f-img img-fluid mx-auto" src="img/popular-news/p-vdo.jpg" alt="">
+								<a class="play-btn" href="https://www.youtube.com/watch?v=ARA0AxrnHdM">
+									<img src="img/play-icon.png" class="vdo-btn" alt="">
+								</a>
+							</div>
+						</div>
+						<div class="">
+							<div class="bottom mt-10 d-flex justify-content-between align-items-center flex-wrap">
+								<div>
+									<a href="#" class="primary-btn">gadgets</a>
+									<a href="#"><span>September 14, 2018</span></a>
+								</div>
+								<div class="meta">
+									<span class="lnr lnr-bubble"></span> 04
+								</div>
+							</div>
+							<a href="#">
+								<h4 class="mt-15">Dealing With Technical Support with Printing Is Very
+									Appealing Comp 10 Useful Tips</h4>
+							</a>
+							<p>
+								It won’t be a bigger problem to find one video game lover in your neighbor. Since the introduction of Virtual
+								Game, it has beenachieving great heights so far as its popularity and technological advancement are
+								concerned.
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End Popular News feed Area -->
+
+	<!-- start footer Area -->
+	<footer class="footer-area section-gap-top">
+		<div class="container">
+			<div class="row pb-10">
+				<div class="col-lg-4 col-md-6">
+					<div class="single-footer-widget">
+						<div class="mb-40">
+							<img src="img/logo.png" alt="">
+						</div>
+						<p>
+							Technology and gadgets Adapter (MPA) is our favorite iPhone solution, since it lets you use the headphones
+							you’re most comfortable with. It has an iPhone-compatible jack at one end and a microphone module with an
+							Answer/End/Pause button and a female 3.5mm audio jack for connectingheadphones
+						</p>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="single-footer-widget">
+						<h6 class="heading">Quick Links</h6>
+						<div class="row">
+							<ul class="col footer-nav">
+								<li><a href="#">Sitemaps</a></li>
+								<li><a href="#">Categories</a></li>
+								<li><a href="#">Archives</a></li>
+								<li><a href="#">Advertise</a></li>
+								<li><a href="#">Ad Choice</a></li>
+							</ul>
+							<ul class="col footer-nav">
+								<li><a href="#">Privacy Policy</a></li>
+								<li><a href="#">Terms of Use</a></li>
+								<li><a href="#">Help Center</a></li>
+								<li><a href="#">Newsletters</a></li>
+								<li><a href="#">Feedback</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-12">
+					<div class="single-footer-widget mail-chimp">
+						<h6 class="heading">Most Viewed News</h6>
+						<div class="footer-news">
+							<div class="single-news d-flex">
+								<div class="image">
+									<img class="" src="img/n1.jpg" alt="">
+								</div>
+								<div class="details">
+									<a href="#">
+										<h4>Converter Ipod Video Taking Portable
+											Video Viewing To A Whole Level</h4>
+									</a>
+									<div class="d-flex justify-content-between">
+										<p>March 14, 2018</p>
+										<p class="meta">
+											<span class="lnr lnr-bubble"></span>
+											<span class="likes">04</span>
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="single-news d-flex">
+								<div class="image">
+									<img class="" src="img/n2.jpg" alt="">
+								</div>
+								<div class="details">
+									<a href="#">
+										<h4>Converter Ipod Video Taking Portable
+											Video Viewing To A Whole Level</h4>
+									</a>
+									<div class="d-flex justify-content-between">
+										<p>March 14, 2018</p>
+										<p class="meta">
+											<span class="lnr lnr-bubble"></span>
+											<span class="likes">04</span>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="copyright-text">
+			<div class="container">
+				<div class="row footer-bottom d-flex justify-content-between">
+					<p class="col-lg-8 col-sm-6 footer-text m-0 text-white"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+					<div class="col-lg-4 col-sm-6 footer-social">
+						<a href="#"><i class="fa fa-facebook"></i></a>
+						<a href="#"><i class="fa fa-twitter"></i></a>
+						<a href="#"><i class="fa fa-youtube-play"></i></a>
+						<a href="#"><i class="fa fa-pinterest"></i></a>
+						<a href="#"><i class="fa fa-rss"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- End footer Area -->
+
+	<script src="js/vendor/jquery-2.2.4.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	 crossorigin="anonymous"></script>
+	<script src="js/vendor/bootstrap.min.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+	<script src="js/easing.min.js"></script>
+	<script src="js/hoverIntent.js"></script>
+	<script src="js/superfish.min.js"></script>
+	<script src="js/jquery.ajaxchimp.min.js"></script>
+	<script src="js/jquery.magnific-popup.min.js"></script>
+	<script src="js/mn-accordion.js"></script>
+	<script src="js/jquery-ui.js"></script>
+	<script src="js/jquery.nice-select.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/mail-script.js"></script>
+	<script src="js/main.js"></script>
 </body>
+
 </html>
